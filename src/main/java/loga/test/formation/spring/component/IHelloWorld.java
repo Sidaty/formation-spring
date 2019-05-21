@@ -12,4 +12,6 @@ package loga.test.formation.spring.component;
 public interface IHelloWorld {
     
     String sayHello(String name);
+    
+    String language();
 }

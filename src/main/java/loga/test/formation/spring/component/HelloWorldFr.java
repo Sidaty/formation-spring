@@ -15,9 +15,13 @@ import org.springframework.stereotype.Component;
 public class HelloWorldFr implements IHelloWorld {
 
     @Override
+    public String language() {
+        return "fr";
+    }
+
+    @Override
     public String sayHello(String name) {
         return "Bonjour " + name;
     }
-    
-    
+
 }

@@ -5,9 +5,8 @@
  */
 package loga.test.formation.spring;
 
-import loga.test.formation.spring.component.HelloWorldEn;
-import loga.test.formation.spring.component.HelloWorldEs;
-import loga.test.formation.spring.component.HelloWorldFr;
+import java.util.Date;
+import java.util.List;
 import loga.test.formation.spring.component.IHelloWorld;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,35 +19,36 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class HelloRunner implements CommandLineRunner {
-    
+
     @Value("${loga.language}")
     private String language;
     
     @Autowired
-    private HelloWorldFr helloWorldFr;
+    private Date date;
+
     @Autowired
-    private HelloWorldEn helloWorldEn;
-//    @Autowired
-//    private HelloWorldEs helloWorldEs;
-    
-    
-    @Autowired
-    private IHelloWorld helloWorldEs;
+    private List<IHelloWorld> helloWorlds;
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("### language : " + language);
-        String message;
-        if("en".equals(language)){
-            message = helloWorldEn.sayHello("Samietou");
-        } else if("es".equals(language)){
-            message = helloWorldEs.sayHello("Samietou");
-        } else if("fr".equals(language)){
-            message = helloWorldFr.sayHello("Samietou");
-        } else {
-            message = "Je ne sais pas";
+        System.out.println("### Date : " + date);
+        String name = "Samietou";
+        System.out.println("################");
+        
+        for(IHelloWorld helloWorld : helloWorlds) {
+            if(!language.equals(helloWorld.language())){
+                continue;
+            }
+            String mes = helloWorld.sayHello(name);
+            System.out.println(mes);
+            break;
         }
-        System.out.println("####### " + message);
+
+//        helloWorlds
+//                .stream()
+//                .map(helloWord -> helloWord.sayHello(name))
+//                .forEach(System.out::println);
     }
 
 }
