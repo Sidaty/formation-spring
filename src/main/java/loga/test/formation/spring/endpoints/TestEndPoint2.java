@@ -18,14 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("test2")
 public class TestEndPoint2 {
-    
-    @Autowired
-    private HelloService helloService;
-    
-    
+
+    private final HelloService helloService;
+
+    public TestEndPoint2(HelloService helloService) {
+        this.helloService = helloService;
+    }
+
     @RequestMapping("hello")
     public String sayHello(@RequestParam("n") String name, @RequestParam("lg") String lg) {
         return helloService.sayHello(name, lg);
     }
-    
+
 }
