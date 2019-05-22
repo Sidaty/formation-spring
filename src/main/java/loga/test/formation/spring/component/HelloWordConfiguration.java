@@ -15,14 +15,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class HelloWordConfiguration {
-    
+
     @Bean
     public Date getDate() {
         return new Date();
     }
-    
-    
-    @Bean IHelloWorld helloWorldHaoussa() {
+
+    @Bean
+    public IHelloWorld helloWorldHaoussa() {
         return new IHelloWorld() {
             @Override
             public String sayHello(String name) {

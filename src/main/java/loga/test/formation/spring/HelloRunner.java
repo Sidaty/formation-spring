@@ -22,7 +22,7 @@ public class HelloRunner implements CommandLineRunner {
 
     @Value("${loga.language}")
     private String language;
-    
+
     @Autowired
     private Date date;
 
@@ -31,19 +31,24 @@ public class HelloRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("### language : " + language);
-        System.out.println("### Date : " + date);
         String name = "Samietou";
         System.out.println("################");
-        
-        for(IHelloWorld helloWorld : helloWorlds) {
-            if(!language.equals(helloWorld.language())){
+
+        String mes = sayHello(name);
+        System.out.println(mes);
+    }
+
+    public String sayHello(String name) {
+        System.out.println("### language : " + language);
+        System.out.println("### Date : " + date);
+        for (IHelloWorld helloWorld : helloWorlds) {
+            if (!language.equals(helloWorld.language())) {
                 continue;
             }
-            String mes = helloWorld.sayHello(name);
-            System.out.println(mes);
-            break;
+            return helloWorld.sayHello(name);
         }
+
+        return "inconnue";
 
 //        helloWorlds
 //                .stream()
