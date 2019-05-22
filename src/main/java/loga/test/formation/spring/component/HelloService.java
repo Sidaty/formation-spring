@@ -26,7 +26,6 @@ public class HelloService {
 
     @Autowired
     private List<IHelloWorld> helloWorlds;
-
     
     public String sayHello(String name) {
         return sayHello(name, language);
@@ -35,20 +34,21 @@ public class HelloService {
     public String sayHello(String name, String lg) {
         System.out.println("### language : " + lg);
         System.out.println("### Date : " + date);
-        for (IHelloWorld helloWorld : helloWorlds) {
-            if (!lg.equals(helloWorld.language())) {
-                continue;
-            }
-            return helloWorld.sayHello(name);
-        }
+//        for (IHelloWorld helloWorld : helloWorlds) {
+//            if (!lg.equals(helloWorld.language())) {
+//                continue;
+//            }
+//            return helloWorld.sayHello(name);
+//        }
+//
+//        return "inconnue";
 
-        return "inconnue";
-
-//        helloWorlds
-//                .stream()
-//                .map(helloWord -> helloWord.sayHello(name))
-//                .forEach(System.out::println);
+        return helloWorlds
+                .stream()
+                .filter(hw -> hw.language().equals(lg))
+                .findFirst()
+                .map(hw -> hw.sayHello(name))
+                .orElse("inconnue");
     }
-
     
 }
