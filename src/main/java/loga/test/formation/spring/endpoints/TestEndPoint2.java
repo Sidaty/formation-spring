@@ -16,15 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author sidaty
  */
 @RestController
-@RequestMapping("test")
-public class TestEndPoint {
+@RequestMapping("test2")
+public class TestEndPoint2 {
     
     @Autowired
     private HelloService helloService;
     
+    
     @RequestMapping("hello")
-    public String sayHello(@RequestParam("n") String name) {
-        return helloService.sayHello(name);
+    public String sayHello(@RequestParam("n") String name, @RequestParam("lg") String lg) {
+        return helloService.sayHello(name, lg);
     }
     
 }
